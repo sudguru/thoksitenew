@@ -13,7 +13,7 @@ class AuthController extends Controller {
     }
 
     public function getSignIn($request, $response) {
-        return $this->view->render($response, 'auth/signin.twig');
+        return $this->view->render($response, 'ajax/signin.html');
     }
 
     public function PostSignIn($request, $response) {
@@ -23,7 +23,7 @@ class AuthController extends Controller {
        );
        if (!$auth) {
             $this->flash->addMessage('error', 'Wrong Credentials');
-           return $response->withRedirect($this->router->pathFor('auth.signin'));
+            return $response->withRedirect($this->router->pathFor('auth.signin'));
        }
        return $response->withRedirect($this->router->pathFor('home'));
     }

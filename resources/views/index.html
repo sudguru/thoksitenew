@@ -13,6 +13,11 @@
     {{ include('partials/home-infoboxes.html') }}
     
     {{ include('partials/horizontal-banners.html') }}
+    {% if auth.check %}
+        Logged In
+    {% else %}
+        Not Logged In 
+    {% endif %}
     
     {{ include('partials/home-featured.html') }}
 
