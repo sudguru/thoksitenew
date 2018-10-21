@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}
+    Home | Thoksaman.com
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {{ include('partials/home-slider.html') }}
+
+    {{ include('partials/home-infoboxes.html') }}
+    
+    {{ include('partials/horizontal-banners.html') }}
+    
+    {{ include('partials/home-featured.html') }}
+
+    <div class="mb-5"></div>
+
+    {{ include('partials/home-new.html')}}
+
+    <div class="mb-5"></div>
+
+    {{ include('partials/info-section.html') }}
+
+    {{ include('partials/horizontal-promo.html') }}
+
+    {{ include('partials/partners.html') }}
+
+    {{ include('partials/home-blog.html') }}
+{% endblock %}
+
+{% block foot %}
+    {{ parent() }}
+{% endblock %}

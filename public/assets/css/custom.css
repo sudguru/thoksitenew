@@ -1,0 +1,22 @@
+a.text-promo {
+    color: green;
+}
+.welcome-msg::after{
+    content: none;
+}
+.welcome-msg {
+    display: block;
+}
+
+.header-top {
+    line-height: 2.0;
+}
+.info-box i {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: #777;
+}
+
+ul#ticker li {
+	list-style:none;
+}

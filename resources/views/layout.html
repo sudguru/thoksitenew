@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Porto - Bootstrap eCommerce Template">
+    <link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/solid.css" integrity="sha384-osqezT+30O6N/vsMqwW8Ch6wKlMofqueuia2H7fePy42uC05rm1G+BUPSd2iBSJL" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/fontawesome.css" integrity="sha384-BzCy2fixOYd0HObpx3GMefNqdbA7Qjcc91RgYeDjrHTIEXqiF00jKvgQG0+zY/7I" crossorigin="anonymous">
+    {% block head %}
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+    {% endblock %}
+</head>
+<body>
+    <div class="page-wrapper">
+        
+        {{ include('partials/header.html') }}
+        
+        <main class="main">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        {{ include('partials/footer.html') }}
+        
+    </div>
+
+    {{ include('partials/mobile-menu.html') }}
+
+    {% block popup %}
+        <div class="newsletter-popup mfp-hide" id="newsletter-popup-form" style="background-image: url(assets/images/newsletter_popup_bg.jpg)">
+            <div class="newsletter-popup-content">
+                <img src="assets/images/logo-black.png" alt="Logo" class="logo-newsletter">
+                <h2>BE THE FIRST TO KNOW</h2>
+                <p>Subscribe to the Porto eCommerce newsletter to receive timely updates from your favorite products.</p>
+                <form action="#">
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="Email address" required>
+                        <input type="submit" class="btn" value="Go!">
+                    </div><!-- End .from-group -->
+                </form>
+                <div class="newsletter-subscribe">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="1">
+                            Don't show this popup again
+                        </label>
+                    </div>
+                </div>
+            </div><!-- End .newsletter-popup-content -->
+        </div>
+    {% endblock %}
+
+
+    {% block foot %}
+        <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/plugins.min.js"></script>
+        <script src="assets/js/main.min.js"></script>
+        <script src="assets/js/ticker.js"></script>
+        <script src="assets/js/custom.js"></script>
+    {% endblock %}
+
+</body>
+</html>
