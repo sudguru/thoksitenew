@@ -13,10 +13,20 @@ class AuthController extends Controller {
     }
 
     public function getSignIn($request, $response) {
-        return $this->view->render($response, 'ajax/signin.html');
+        return $this->view->render($response, 'auth/signin.html');
     }
 
     public function PostSignIn($request, $response) {
+
+        $validation = $this->validator->validate($request, [
+            'email' => v::noWhitespace()->notEmpty()->email(), //->alpha()
+            'password' => v::noWhitespace()->notEmpty(),
+        ]);
+        
+        if($validation->failed()) {
+            return $response->withRedirect($this->router->pathFor('auth.signin'));
+        }
+
        $auth = $this->auth->attempt(
            $request->getParam('email'),
            $request->getParam('password')
@@ -63,7 +73,7 @@ class AuthController extends Controller {
         
         $c = $this->auth->attempt($request->getParam('email'), $request->getParam('password'));
         // var_dump($c);
-        return $response->withRedirect($this->router->pathFor('home'));
+        return $response->withRedirect($this->router->pathFor('/'));
 
     }
 } 

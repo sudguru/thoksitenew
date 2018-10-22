@@ -19,12 +19,18 @@
                     <a href="#" style="font-weight: bold">Links</a>
                     <div class="header-menu">
                         <ul>
-                            <li><a href="my-account.html">MY ACCOUNT </a></li>
-                            <li><a href="#">DAILY DEAL</a></li>
-                            <li><a href="#">MY WISHLIST </a></li>
-                            <li><a href="blog.html">BLOG</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="#" class="login-link">LOG IN</a></li>
+                            {% if auth.check %}
+                                <li><a href="/dashboard">MY ACCOUNT </a></li>
+                                <li><a href="/auth/signout">SIGN OUT </a></li>
+                            {% else %}
+                                <li><a href="/auth/signin">LOG IN</a></li>
+                                <li><a href="/auth/signup">SIGN UP</a></li>
+                            {% endif %}
+ 
+                            <li><a href="/wishlist">MY WISHLIST </a></li>
+                            <li><a href="/blog">BLOG</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                            
                         </ul>
                     </div><!-- End .header-menu -->
                 </div><!-- End .header-dropown -->
@@ -35,8 +41,8 @@
     <div class="header-middle">
         <div class="container">
             <div class="header-left">
-                <a href="index.html" class="logo">
-                    <img src="assets/images/logo.png" alt="Porto Logo">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.png" alt="{{setting.site_name}}">
                 </a>
             </div><!-- End .header-left -->
 
@@ -290,8 +296,8 @@
                             <li><a href="#">Footer Types</a></li>
                         </ul>
                     </li>
-                    <li class="float-right"><a href="#">Buy Porto!</a></li>
-                    <li class="float-right"><a href="#">Special Offer!</a></li>
+                    <li class="float-right"><a href="/daily-deals">Daily Deals</a></li>
+                    <li class="float-right"><a href="/sales">Sales !</a></li>
                 </ul>
             </nav>
         </div><!-- End .header-bottom -->

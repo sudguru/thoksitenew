@@ -22,5 +22,10 @@ $container['csrf'] = function($container) {
 
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));
-$app->add(new \App\Middleware\CsrfViewMiddleware($container));
+// $app->add(new \App\Middleware\CsrfViewMiddleware($container));
 // $app->add($container->csrf);
+
+//Account
+$container['DashboardController'] = function($container) {
+    return new \App\Controllers\Account\DashboardController($container);
+};
