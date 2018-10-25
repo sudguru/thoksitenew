@@ -15,14 +15,26 @@ $app->group('', function() {
 })->add(new GuestMiddleware($container))->add(new CsrfViewMiddleware($container))->add($container->csrf);
 
 
+
 $app->group('', function() {
 
     $this->get('/auth/signout', 'AuthController:getSignOut')->setName('auth.signout');
+    $this->get('/account/dashboard', 'DashboardController:index')->setName('account.dashboard');  
+    $this->get('/account/addresses', 'AccountInfoController:getAddresses')->setName('account.addresses');
+
+})->add(new AuthMiddleware($container));
+
+$app->group('', function() {
     $this->get('/auth/password/change', 'PasswordController:getChangePassword')->setName('auth.password.change');
     $this->post('/auth/password/change', 'PasswordController:postChangePassword');
 
-    $this->get('/dashboard', 'DashboardController:index')->setName('dashboard');
+    $this->get('/account/info', 'AccountInfoController:getAccountInfo')->setName('account.info');
+    $this->post('/account/info', 'AccountInfoController:updateAccountInfo');
+})->add(new AuthMiddleware($container))->add(new CsrfViewMiddleware($container))->add($container->csrf);
 
-})->add(new AuthMiddleware($container));
+$app->get('/cart', 'CartController:getCart');
+$app->post('/cart', 'CartController:postCart');
+$app->put('/cart', 'CartController:updateCart');
+$app->delete('/cart/{id}', 'CartController:deleteCart');
 
 

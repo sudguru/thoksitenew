@@ -29,3 +29,7 @@ $app->add(new \App\Middleware\OldInputMiddleware($container));
 $container['DashboardController'] = function($container) {
     return new \App\Controllers\Account\DashboardController($container);
 };
+
+$container['AccountInfoController'] = function($container) {
+    return new \App\Controllers\Account\AccountInfoController($container);
+};

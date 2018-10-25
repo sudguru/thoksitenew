@@ -20,11 +20,11 @@
                     <div class="header-menu">
                         <ul>
                             {% if auth.check %}
-                                <li><a href="/dashboard">MY ACCOUNT </a></li>
-                                <li><a href="/auth/signout">SIGN OUT </a></li>
+                                <li><a href="{{ path_for('account.dashboard') }}">MY ACCOUNT </a></li>
+                                <li><a href="{{ path_for('auth.signout') }}">SIGN OUT </a></li>
                             {% else %}
-                                <li><a href="/auth/signin">LOG IN</a></li>
-                                <li><a href="/auth/signup">SIGN UP</a></li>
+                                <li><a href="{{ path_for('auth.signin') }}">LOG IN</a></li>
+                                <li><a href="{{ path_for('auth.signup') }}">SIGN UP</a></li>
                             {% endif %}
  
                             <li><a href="/wishlist">MY WISHLIST </a></li>
@@ -110,7 +110,7 @@
 
                                     <figure class="product-image-container">
                                         <a href="product.html" class="product-image">
-                                            <img src="assets/images/products/cart/product-1.jpg" alt="product">
+                                            <img src="/assets/images/products/cart/product-1.jpg" alt="product">
                                         </a>
                                         <a href="#" class="btn-remove" title="Remove Product"><i class="icon-cancel"></i></a>
                                     </figure>
@@ -130,7 +130,7 @@
 
                                     <figure class="product-image-container">
                                         <a href="product.html" class="product-image">
-                                            <img src="assets/images/products/cart/product-2.jpg" alt="product">
+                                            <img src="/assets/images/products/cart/product-2.jpg" alt="product">
                                         </a>
                                         <a href="#" class="btn-remove" title="Remove Product"><i class="icon-cancel"></i></a>
                                     </figure>
@@ -200,7 +200,7 @@
                                 <div class="col-lg-4">
                                     <div class="banner">
                                         <a href="#">
-                                            <img src="assets/images/menu-banner-2.jpg" alt="Menu banner">
+                                            <img src="/assets/images/menu-banner-2.jpg" alt="Menu banner">
                                         </a>
                                     </div><!-- End .banner -->
                                 </div><!-- End .col-lg-4 -->
@@ -253,7 +253,7 @@
                                 <div class="col-lg-4">
                                     <div class="banner">
                                         <a href="#">
-                                            <img class="product-promo" src="assets/images/menu-banner.jpg" alt="Menu banner">
+                                            <img class="product-promo" src="/assets/images/menu-banner.jpg" alt="Menu banner">
                                         </a>
                                     </div><!-- End .banner -->
                                 </div><!-- End .col-lg-4 -->

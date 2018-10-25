@@ -1,13 +1,15 @@
 <li><h5 style="margin: 0; margin-top: 20px; color: #999">General</h5></li>
-<li class="{{ currentPage == 'dashboard' ? 'active' : '' }}"><a href="#">Account Dashboard</a></li>
-<li class="{{ currentPage == 'accountinfo' ? 'active' : '' }}"><a href="#">Account Information</a></li>
-<li class="{{ currentPage == 'changepassword' ? 'active' : '' }}"><a href="#">Change Password</a></li>
-<li class="{{ currentPage == 'addressbook' ? 'active' : '' }}"><a href="#">Address Book</a></li>
+<li class="{{ currentPage == 'dashboard' ? 'active' : '' }}"><a href="{{ path_for('account.dashboard') }}">Account Dashboard</a></li>
+<li class="{{ currentPage == 'accountinfo' ? 'active' : '' }}"><a href="/account/info">Account Information</a></li>
+<li><a href="/auth/password/change">Change Password</a></li>
+<li class="{{ currentPage == 'addressbook' ? 'active' : '' }}"><a href="/account/addresses">Address Book</a></li>
+
 <li><h5 style="margin: 0; margin-top: 20px; color: #999">For Customer</h5></li>
-<li class="{{ currentPage == 'clientorders' ? 'active' : '' }}"><a href="#">My Orders</a></li>
-<li><a href="#">My Wishlist</a></li>
-<li><a href="#">Currently in my Cart</a></li>
+<li class="{{ currentPage == 'clientorders' ? 'active' : '' }}"><a href="/account/customer/orders">My Orders</a></li>
+<li><a href="/cart">My Wishlist</a></li>
+<li><a href="/wishlist">Currently in my Cart</a></li>
 <li class="{{ currentPage == 'clientmessages' ? 'active' : '' }}"><a href="#">My Messages</a></li>
+
 <li><h5 style="margin: 0; margin-top: 20px; color: #999">For Merchant</h5></li>
 <li class="{{ currentPage == 'merchantnewproduct' ? 'active' : '' }}"><a href="#">Add New Product</a></li>
 <li class="{{ currentPage == 'merchangeproducts' ? 'active' : '' }}"><a href="#">My Products</a></li>

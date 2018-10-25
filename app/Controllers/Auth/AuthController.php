@@ -39,7 +39,7 @@ class AuthController extends Controller {
     }
     
     public function getSignUp($request, $response) {
-        return $this->view->render($response, 'auth/signup.twig');
+        return $this->view->render($response, 'auth/signup.html');
     }
 
     /**
@@ -73,7 +73,7 @@ class AuthController extends Controller {
         
         $c = $this->auth->attempt($request->getParam('email'), $request->getParam('password'));
         // var_dump($c);
-        return $response->withRedirect($this->router->pathFor('/'));
+        return $response->withRedirect($this->router->pathFor('home'));
 
     }
 } 

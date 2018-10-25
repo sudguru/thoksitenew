@@ -8,7 +8,7 @@ use Respect\Validation\Validator as v;
 class PasswordController extends Controller {
 
     public function getChangePassword($request, $response) {
-        return $this->view->render($response, 'auth/password/change.twig');
+        return $this->view->render($response, 'auth/change.html');
     }
 
     public function postChangePassword($request, $response) {
@@ -24,6 +24,6 @@ class PasswordController extends Controller {
         $this->auth->user()->setPassword($request->getParam('password'));
 
         $this->flash->addMessage('info', 'Your password has been changed.');
-        return $response->withRedirect($this->router->pathFor('home'));
+        return $response->withRedirect($this->router->pathFor('auth.password.change'));
     }
 } 

@@ -14,18 +14,17 @@ Sign In | Thoksaman.com
 
     <div class="row justify-content-center">
         <div class="col-6">
-            <h2 class="title mb-2">Login</h2>
+            <h2 class="title mb-2">Change Password</h2>
                 
-            <form action="{{ path_for('auth.signin') }}" method="POST" autocomplete="off" novalidate class="mb-1">
-
-                <label for="email">Email address <span class="required">*</span></label>
-                <input type="email" name="email" class="form-control form-wide {{ errors.email ? 'is-invalid' : 'mb-2' }}" id="email" value="{{ old.email }}" />
-                {% if errors.email %}
+            <form action="{{ path_for('auth.password.change') }}" method="POST" autocomplete="off" novalidate class="mb-1">
+                <label for="password_old">Old Password <span class="required">*</span></label>
+                <input type="password" name="password_old" class="form-control form-wide {{ errors.password_old ? 'is-invalid' : 'mb-2' }}" id="password_old"  value="" />
+                {% if errors.password_old %}
                     <div class="invalid-feedback mb-2">
-                        {{ errors.email | first }}
+                        {{ errors.password_old | first }}
                     </div>
                 {% endif %}
-
+                
                 <label for="password">Password <span class="required">*</span></label>
                 <input type="password" name="password" class="form-control form-wide {{ errors.password ? 'is-invalid' : 'mb-2' }}" id="password"  value="" />
                 {% if errors.password %}
@@ -35,11 +34,12 @@ Sign In | Thoksaman.com
                 {% endif %}
 
                 <div class="form-footer">
-                    <button type="submit" class="btn btn-primary btn-md">LOGIN</button>
+                    <button type="submit" class="btn btn-primary btn-md">CHANGE PASSWORD</button>
 
-                    <div class="custom-control custom-checkbox form-footer-right">
-                        <input type="checkbox" class="custom-control-input" id="lost-password">
-                        <label class="custom-control-label form-footer-right" for="lost-password">Remember Me</label>
+
+
+                    <div class="custom-control  form-footer-right">
+                        <a href="/account/dashboard">&laquo; My Account</a>
                     </div>
                 </div><!-- End .form-footer -->
 
