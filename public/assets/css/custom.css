@@ -24,3 +24,8 @@ ul#ticker li {
 .form-control {
     max-width: 100% !important;
 }
+
+.custom-select {
+    height: calc(4.6rem + 2px);
+}
+

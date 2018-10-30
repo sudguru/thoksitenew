@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+{% block title %}
+Sign In | Thoksaman.com
+{% endblock %}
+
+{% block head %}
+{{ parent() }}
+<link rel="stylesheet" href="/assets/plugins/trumbowyg/dist/ui/trumbowyg.min.css">
+<link rel="stylesheet" href="/assets/plugins/trumbowyg/dist/plugins/table/ui/trumbowyg.table.css">
+<style>
+    .trumbowyg-box, .trumbowyg-editor {
+        margin: 0 auto;
+        min-height:100px
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+    </div><!-- End .container -->
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 order-lg-last dashboard-content">
+            <h2>Add New Product</h2>
+            <form action="{{ path_for('auth.signin') }}" method="POST" autocomplete="off" novalidate class="mb-1">
+                <div class="form-group">
+                    <label for="name">Product Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="category_id">Category</label>
+                            <select class="custom-select" name="category_id" id="category_id">
+                                {% for category in categories %}
+                                {% if category.children | length > 0 %}
+                                <optgroup label="{{category.category}}">
+                                    {% for child in category.children %}
+                                    <option value="{{child.id}}">{{child.category}}</option>
+                                    {% endfor %}
+                                </optgroup>
+                                {% else %}
+                                <option value="{{category.id}}">{{category.category}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="SKU">SKU <span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="SKU" name="SKU" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="available">Available <span class="required">*</span></label>
+                                    <select class="custom-select" id="available" name="available">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="min_order_unit">Min Order Unit<span class="required">*</span></label>
+                                    <input type="number" class="form-control" id="min_order_unit" name="min_order_unit" value="1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="max_order_unit">Max Order Unit<span class="required">*</span></label>
+                                    <input type="number" class="form-control" id="max_order_unit" name="max_order_unit" value="10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                            <label for="description">Short Description</label>
+                            <textarea class="form-control editor" name="description" id="description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="specification">Detailed Specification</label>
+                    <textarea class="form-control editor" name="description" id="description"></textarea>
+                </div>
+            </form>
+
+
+            <div class="mb-2"></div><!-- margin -->
+
+
+            <div class="card">
+                <div class="card-header">
+                    Product Images
+                    <a href="#" class="card-edit"><i class="fas fa-plus"></i> &nbsp;Add New Image</a>
+                </div><!-- End .card-header -->
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div style="background-color: #ddd">Image</div>
+                        </div>
+                        <div class="col-md-2">
+                                Image
+                            </div>
+                            <div class="col-md-2">
+                                    Image
+                                </div>
+                    </div>
+                </div><!-- End .card-body -->
+            </div><!-- End .card -->
+        </div><!-- End .col-lg-9 -->
+
+        <aside class="sidebar col-lg-3">
+            <div class="widget widget-dashboard">
+                <h3 class="widget-title">My Account</h3>
+
+                <ul class="list">
+                    {{ include('account/sidebar.html') }}
+                </ul>
+            </div><!-- End .widget -->
+        </aside><!-- End .col-lg-3 -->
+    </div><!-- End .row -->
+</div><!-- End .container -->
+
+<div class="mb-5"></div><!-- margin -->
+{% endblock %}
+
+{% block foot %}
+{{ parent() }}
+<script src="/assets/plugins/trumbowyg/dist/trumbowyg.min.js"></script>
+<script src="/assets/plugins/trumbowyg/dist/plugins/history/trumbowyg.history.js"></script>
+<script src="/assets/plugins/trumbowyg/dist/plugins/table/trumbowyg.table.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.editor').trumbowyg({
+            btns: [
+                ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                ['link', 'table'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ],
+            plugins: {
+                table: {
+                    // Some table plugin options, see details below
+                    rows: 8,
+                    columns: 8,
+                    styler: 'table'
+                }
+            },
+            removeformatPasted: true
+        });
+    
+    });
+</script>
+{% endblock %}

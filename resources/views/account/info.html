@@ -43,9 +43,14 @@ Sign In | Thoksaman.com
               {% endif %}
             </div>
             <div class="col-md-3" style="text-align: center">
-              <img src="/assets/images/logo_placeholder.jpg" style="width:60%; margin: 0 auto; cursor: pointer" id="fileUploadTrigger" />
+              {% if auth.user.logo|length > 4 %}
+              {% set logo = "/uploads/logos/" ~ auth.user.logo %}
+              {% else %}
+              {% set logo = "/assets/images/logo_placeholder.jpg" %}
+              {% endif %}
+              <img src="{{logo}}" style="width:60%; margin: 0 auto; cursor: pointer" id="logoImage" />
               <small><em>Click to Add/Change</em></small>
-              <input type="file" name="logo" id="logo" style="display: none"  />
+              <input type="file" name="logo" id="logo" style="display: none" accept="image/x-png,image/gif,image/jpeg"  />
             </div>
           </div>
 
@@ -147,7 +152,7 @@ Sign In | Thoksaman.com
 
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" name="payment_methods[]" value="{{pm.id}}" class="custom-control-input" id="payment_method_{{pm.id}}"
-                        {{ pm.id in auth.user.payment_methods ? "checked" : "" }}>
+                        {{ pm.id in auth.user.payment_methods ? 'checked' : '' }}>
                       <label class="custom-control-label" for="payment_method_{{pm.id}}">{{pm.payment_method}}</label>
                     </div><!-- End .custom-checkbox -->
                     {% endfor %}
@@ -199,6 +204,8 @@ Sign In | Thoksaman.com
 {{ parent() }}
 <script>
   $(document).ready(function () {
+    var id = "{{ auth.user.id}}";
+      
     $('#sameas').on('click', function () {
       $('#shipping_address').val($('#address').val());
       $('#shipping_city').val($('#city').val());
@@ -208,12 +215,58 @@ Sign In | Thoksaman.com
       $('#shipping_postal_code').val($('#postal_code').val());
     });
 
-    $('#fileUploadTrigger').on('click', function() {
+    $('#logoImage').on('click', function() {
         $('#logo').click();
     });
 
     $('#logo').on('change', function(e) {
-      console.log(e.target.value.filename);
+      
+      var file = document.getElementById('logo').files[0];
+      var logo = document.getElementById('logoImage');
+      var filename = file.name;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        
+        imageDataURL = e.target.result;
+        
+        var image = new Image();
+        image.src = imageDataURL;
+        console.log(image);
+        image.onload = function (imageEvent) {
+          console.log('iii');
+            // Resize the image
+            var canvas = document.createElement('canvas'),
+                max_size = 300,
+                width = image.width,
+                height = image.height;
+            if (width > height) {
+                if (width > max_size) {
+                    height *= max_size / width;
+                    width = max_size;
+                }
+            } else {
+                if (height > max_size) {
+                    width *= max_size / height;
+                    height = max_size;
+                }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+            var dataUrl = canvas.toDataURL('image/jpeg');
+            console.log(dataUrl);
+            $.post('http://localhost:8080/account/uploadlogo', {imageDataURL: dataUrl, filename: filename, id: +id}, function(response){ 
+              if(response) {
+                logo.src = dataUrl;
+              } else {
+                alert('Unable to upload file.')
+              }
+              
+            });
+        }
+        
+      }
+      reader.readAsDataURL(file);
     });
   });
 </script>

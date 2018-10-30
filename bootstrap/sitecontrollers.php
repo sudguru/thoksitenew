@@ -33,3 +33,7 @@ $container['DashboardController'] = function($container) {
 $container['AccountInfoController'] = function($container) {
     return new \App\Controllers\Account\AccountInfoController($container);
 };
+
+$container['ProductController'] = function($container) {
+    return new \App\Controllers\Account\ProductController($container);
+};

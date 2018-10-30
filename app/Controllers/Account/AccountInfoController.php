@@ -28,6 +28,28 @@ class AccountInfoController extends Controller {
         );
     }
 
+    public function uploadLogo($request, $response) {
+        // $this->logger->addInfo($request->getParam('imageDataURL'));
+
+        $upload_dir = "../public/uploads/logos/";
+        $id = $request->getParam('id');
+        $photo = $request->getParam('imageDataURL');
+        $filename = rand(10000, 99999) . '-' . $request->getParam('filename');
+        $img = str_replace('data:image/png;base64,', '', $photo);
+        $img = str_replace('data:image/jpeg;base64,', '', $img);
+        $img = str_replace('data:image/gif;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $imagedata = base64_decode($img);
+        $file = $upload_dir . $filename;
+        $success = file_put_contents($file, $imagedata);
+        if($success) {
+            User::where('id', $id)->update([
+                'logo' => $filename
+            ]);
+        }
+        return $response->withJson($success);
+    }
+
     public function updateAccountInfo($request, $response) {
 
         //var_dump($request->getParam('payment_methods'));
@@ -40,7 +62,7 @@ class AccountInfoController extends Controller {
             return $response->withRedirect($this->router->pathFor('account.info'));
         }
         $id = $this->auth->user()->id;
-        $b = User::where('id', $id)->update([
+        User::where('id', $id)->update([
             'name' => $request->getParam('name'),
             'company_name' => $request->getParam('company_name'),
             'address' => $request->getParam('address'),
